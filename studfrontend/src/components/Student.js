@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Container, Paper } from '@mui/material';
+import { Container, Paper, Button } from '@mui/material';
 
 export default function Student() {
   const paperStyle = { padding: '50px 30px', width: 600, margin: '20px auto' };
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
+  const handleClick = (event) => {
+    event.preventDefault();
+    const student = { name, address };
+    fetch('http://localhost:8080/student/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(student)
+    }).then(() => {});
+  };
   return (
     <Container>
       <Paper elevation={4} style={paperStyle}>
-        <h1 style={{ color: 'green', margin: '0px', padding: '5px' }}>
+        <h1 style={{ color: 'blue', margin: '0px', padding: '5px' }}>
           Enter New Student data
         </h1>
         <Box
@@ -36,6 +45,9 @@ export default function Student() {
             onChange={(e) => setAddress(e.target.value)}
           />
         </Box>
+        <Button variant='contained' color='success' onClick={handleClick}>
+          Submit
+        </Button>
       </Paper>
     </Container>
   );
