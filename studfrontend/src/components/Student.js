@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Container, Paper, Button } from '@mui/material';
@@ -7,6 +7,7 @@ export default function Student() {
   const paperStyle = { padding: '50px 30px', width: 600, margin: '20px auto' };
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
+  const [students, getStudents] = useState('');
   const handleClick = (event) => {
     event.preventDefault();
     const student = { name, address };
@@ -16,6 +17,15 @@ export default function Student() {
       body: JSON.stringify(student)
     }).then(() => {});
   };
+
+  useEffect(() => {
+    fetch('http://localhost:8080/student/view')
+      .then((res) => res.json())
+      .then((result) => {
+        getStudents(result);
+      });
+  }, []);
+
   return (
     <Container>
       <Paper elevation={4} style={paperStyle}>
