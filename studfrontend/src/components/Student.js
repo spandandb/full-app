@@ -59,6 +59,39 @@ export default function Student() {
           Submit
         </Button>
       </Paper>
+
+      <h1>Student Details Available</h1>
+
+      {/* <Paper elevation={4} style={paperStyle}>
+        {students.map((student) => {
+          <Paper
+            elevation={8}
+            style={{ margin: '10px', padding: '15px', textAlign: 'left' }}
+            key={student.id}
+          >
+            Id : {student.id}
+            Name : {student.name}
+            Address : {student.address}
+          </Paper>;
+        })}
+        ;
+      </Paper> */}
+
+      <Paper elevation={3} style={paperStyle}>
+        {students.map((student) => (
+          <Paper
+            elevation={6}
+            style={{ margin: '10px', padding: '15px', textAlign: 'left' }}
+            key={student.id}
+          >
+            Id:{student.id}
+            <br />
+            Name:{student.name}
+            <br />
+            Address:{student.address}
+          </Paper>
+        ))}
+      </Paper>
     </Container>
   );
 }
